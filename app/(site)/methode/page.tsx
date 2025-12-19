@@ -261,7 +261,7 @@ function PijlerBlock({
 
   return (
     <section className="relative">
-      <div className="relative overflow-hidden rounded-3xl border bg-gradient-to-br p-8 lg:p-12 shadow-md"
+      <div 
         className={
           `relative overflow-hidden rounded-3xl border bg-gradient-to-br p-8 lg:p-12 shadow-md ${accentStyles.border} ${accentStyles.bg}`
         }
