@@ -1,4 +1,4 @@
-import type { LessonContent } from "@/lib/lesson-content";
+import type { LessonContent } from "@/app/lib/lesson-content";
 
 const content: LessonContent = {
   introVideo: {
