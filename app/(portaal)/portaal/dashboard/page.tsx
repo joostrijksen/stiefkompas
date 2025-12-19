@@ -102,9 +102,11 @@ export default async function DashboardPage() {
 
     if (last?.module_slug && last?.lesson_slug && last?.section_id) {
       const mod = modules.find((m) => m.slug === last.module_slug);
+
       const les = mod?.lessons.find((l) => l.slug === last.lesson_slug);
-      const sectionLabel =
-        SECTION_TITLES[last.section_id as any] ?? last.section_id;
+     const sectionKey = String(last.section_id) as keyof typeof SECTION_TITLES;
+     
+const sectionLabel = SECTION_TITLES[sectionKey] ?? String(last.section_id);
 
       lastActivityText = `${mod?.title ?? last.module_slug} • ${
         les?.title ?? last.lesson_slug
