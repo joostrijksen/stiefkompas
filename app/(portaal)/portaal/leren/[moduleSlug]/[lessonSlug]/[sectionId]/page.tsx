@@ -88,7 +88,8 @@ export default async function LessonSectionPage({
 
   const completedCount = completedIds.size;
   const percent = Math.round((completedCount / totalSections) * 100);
-  const sectionLabel = SECTION_TITLES[sectionId as any] ?? sectionId;
+  const sectionKey = String(sectionId) as keyof typeof SECTION_TITLES;
+const sectionLabel = SECTION_TITLES[sectionKey] ?? String(sectionId);
 
   /* ---------------------------------------------
      Render
