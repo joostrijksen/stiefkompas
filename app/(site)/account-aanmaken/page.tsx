@@ -2,10 +2,10 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { createSupabaseBrowserClient } from "@/app/lib/supabase/client";
+import { createClient } from "@/app/lib/supabase/client";
 
 export default function AccountAanmakenPage() {
-  const supabase = createSupabaseBrowserClient();
+  const supabase = createClient();
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -80,7 +80,6 @@ export default function AccountAanmakenPage() {
       "Account aangemaakt en aanvraag ontvangen. Je kunt alvast inloggen, maar toegang wordt pas actief na goedkeuring."
     );
 
-    // ✅ veilig resetten (e.currentTarget kan null zijn)
     formRef.current?.reset();
   }
 
