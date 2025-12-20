@@ -1,26 +1,37 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  // Check of er al een auth cookie is
-  const isAuthenticated = request.cookies.get('site-password-auth')
-  
-  // Als de pagina de password pagina zelf is, laat door
-  if (request.nextUrl.pathname === '/site-password') {
-    return NextResponse.next()
+  const { pathname } = request.nextUrl;
+
+  // ✅ Laat de password-pagina altijd door
+  if (pathname === "/site-password") {
+    return NextResponse.next();
   }
-  
-  // Als niet authenticated, redirect naar password pagina
+
+  // ✅ Laat Next intern + assets met rust
+  // (Belangrijk: ook /karin.png en andere bestanden in /public)
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname === "/favicon.ico" ||
+    /\.(?:png|jpg|jpeg|webp|gif|svg|ico|css|js|map|txt|xml|woff|woff2|ttf|eot)$/.test(pathname)
+  ) {
+    return NextResponse.next();
+  }
+
+  // 🔒 Check auth cookie
+  const isAuthenticated = request.cookies.get("site-password-auth");
   if (!isAuthenticated) {
-    return NextResponse.redirect(new URL('/site-password', request.url))
+    const url = request.nextUrl.clone();
+    url.pathname = "/site-password";
+    return NextResponse.redirect(url);
   }
-  
-  return NextResponse.next()
+
+  return NextResponse.next();
 }
 
-// Pas toe op alle pagina's behalve API routes en static files
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|site-password).*)',
-  ],
-}
+  // Alleen pagina's matchen; niet /_next, niet /api, niet assets
+  matcher: ["/((?!_next|api|favicon.ico|site-password).*)"],
+};

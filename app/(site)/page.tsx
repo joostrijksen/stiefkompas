@@ -167,13 +167,13 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-4 lg:justify-end">
               <Link
                 href="/methode"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-slate-900 hover:bg-slate-50 transition shadow-md"
+                className="inline-flex items-center justify-center rounded-full bg-teal-600 px-8 py-4 text-base font-semibold text-white hover:bg-teal-700 transition shadow-lg"
               >
                 Start bij de methode
               </Link>
               <Link
                 href="/training-certificering"
-                className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur px-8 py-4 text-base font-semibold text-white hover:bg-white/15 transition border border-white/20"
+                className="inline-flex items-center justify-center rounded-full bg-transparent px-8 py-4 text-base font-semibold text-white hover:bg-white/10 transition border-2 border-white"
               >
                 Certificering
               </Link>

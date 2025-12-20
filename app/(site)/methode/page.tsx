@@ -11,15 +11,15 @@ export default function MethodePage() {
   return (
     <div className="relative bg-white">
       {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-stone-50">
-        {/* zachte vormen */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50">
+        {/* zachte vormen (logo-kleuren) */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div
-            className="absolute -right-[18%] top-[10%] h-[440px] w-[440px] rounded-[60%_40%_30%_70%/60%_30%_70%_40%] bg-gradient-to-br from-teal-200/35 to-teal-300/20 blur-2xl"
+            className="absolute -right-[18%] top-[10%] h-[440px] w-[440px] rounded-[60%_40%_30%_70%/60%_30%_70%_40%] bg-gradient-to-br from-[#17B3B0]/25 to-[#2C4B9A]/15 blur-2xl"
             style={{ transform: "rotate(-16deg)" }}
           />
           <div
-            className="absolute -left-[14%] bottom-[6%] h-[420px] w-[420px] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] bg-gradient-to-tr from-rose-200/35 to-pink-200/20 blur-2xl"
+            className="absolute -left-[14%] bottom-[6%] h-[420px] w-[420px] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] bg-gradient-to-tr from-[#F02B8A]/22 to-[#2C4B9A]/10 blur-2xl"
             style={{ transform: "rotate(18deg)" }}
           />
         </div>
@@ -27,13 +27,13 @@ export default function MethodePage() {
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-20 pb-20">
           <div className="max-w-3xl space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur-sm px-4 py-2 shadow-sm border border-slate-200/60">
-              <span className="h-2 w-2 rounded-full bg-teal-700" />
+              <span className="h-2 w-2 rounded-full bg-[#17B3B0]" />
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">
                 De Stiefkompas-methodiek
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.08]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[#0E2A47] leading-[1.08]">
               Het Kompasmodel – vijf pijlers om dynamiek te duiden
             </h1>
 
@@ -51,9 +51,9 @@ export default function MethodePage() {
               </p>
             </div>
 
-            <div className="inline-flex items-start gap-3 rounded-2xl bg-white/70 backdrop-blur border border-teal-100 px-6 py-4 text-base text-slate-700 shadow-sm">
+            <div className="inline-flex items-start gap-3 rounded-2xl bg-white/70 backdrop-blur border border-[#17B3B0]/20 px-6 py-4 text-base text-slate-700 shadow-sm">
               <svg
-                className="mt-0.5 h-6 w-6 text-teal-700"
+                className="mt-0.5 h-6 w-6 text-[#2C4B9A]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -80,10 +80,10 @@ export default function MethodePage() {
           n="01"
           accent="teal"
           title="Posities & loyaliteit"
-          intro="Deze pijler richt zich op de posities van alle betrokkenen in het stiefgezin (ouders, stiefouders, kinderen, ex-partners) en de zichtbare en onzichtbare loyaliteiten daartussen. Het doel is te begrijpen wie aan wie loyaal is, welke verwachtingen er leven en waar mensen mogelijk “klem” komen te zitten."
+          intro="Deze pijler richt zich op de posities van alle betrokkenen in het stiefgezin (ouders, stiefouders, kinderen, ex-partners) en de zichtbare en onzichtbare loyaliteiten daartussen. Het doel is te begrijpen wie aan wie loyaal is, welke verwachtingen er leven en waar mensen mogelijk 'klem' komen te zitten."
           signals={[
             "Kinderen voelen zich verantwoordelijk voor het welzijn van een ouder",
-            "Stiefouder ervaart “afstand” of afwijzing en raakt sneller gefrustreerd",
+            "Stiefouder ervaart 'afstand' of afwijzing en raakt sneller gefrustreerd",
             "Er ontstaat spanning zodra grenzen of opvoeding ter sprake komen",
           ]}
           theory="Deze pijler is gebaseerd op systeemtheorie en loyaliteitsleer. Verticale loyaliteit (tussen ouders en kinderen) en horizontale loyaliteit (tussen partners) lopen in stiefsystemen vaak op een andere manier door elkaar."
@@ -96,12 +96,12 @@ export default function MethodePage() {
 
         <PijlerBlock
           n="02"
-          accent="rose"
+          accent="magenta"
           title="Hechting & veiligheid"
           intro="Hechting en ervaren veiligheid vormen een basis voor hoe kinderen en volwassenen nieuwe relaties in het stiefgezin aangaan. Veranderingen in samenstelling, woonritme en relaties kunnen bestaande hechtingspatronen onder druk zetten."
           signals={[
             "Gedrag piekt rondom wisselmomenten (halen/brengen, wisselweken)",
-            "Terugtrekken, claimen of “testen” van nabijheid in relaties",
+            "Terugtrekken, claimen of 'testen' van nabijheid in relaties",
             "Volwassenen voelen zich snel afgewezen of overvraagd",
           ]}
           theory="Deze pijler leunt op hechtingsleer en stressregulatie. Onvoorspelbaarheid, loyaliteitsconflicten en veranderende woonregelingen kunnen leiden tot verhoogde stress en onveiligheidsgevoelens."
@@ -118,7 +118,7 @@ export default function MethodePage() {
           title="Grenzen & structuur"
           intro="In samengestelde gezinnen bestaan vaak verschillende opvoedstijlen, regels en verwachtingen. Deze pijler helpt om rollen, grenzen en structuur te verduidelijken, zodat iedereen weet waar hij of zij aan toe is."
           signals={[
-            "Discussies over regels (“bij mama mag het wel, bij papa niet”)",
+            "Discussies over regels ('bij mama mag het wel, bij papa niet')",
             "Stiefouder neemt te snel een ouderrol óf trekt zich volledig terug",
             "Onzekerheid over wie beslist waarover",
           ]}
@@ -132,7 +132,7 @@ export default function MethodePage() {
 
         <PijlerBlock
           n="04"
-          accent="teal"
+          accent="blue"
           title="Communicatie & patronen"
           intro="Deze pijler gaat over hoe gezinsleden met elkaar communiceren en welke terugkerende patronen zichtbaar worden. Niet alleen wát er gezegd wordt is relevant, maar vooral hóe reacties op elkaar aansluiten en escaleren."
           signals={[
@@ -150,13 +150,13 @@ export default function MethodePage() {
 
         <PijlerBlock
           n="05"
-          accent="rose"
+          accent="magenta"
           title="Gezinsritme & rituelen"
           intro="In deze pijler staat het gezamenlijke ritme centraal: dagelijkse routines, terugkerende momenten en rituelen. Rituelen kunnen samenhang versterken, zonder eerdere gezinnen of relaties uit te wissen."
           signals={[
-            "Spanning rond feestdagen, vakanties en “wie hoort erbij?”",
+            "Spanning rond feestdagen, vakanties en 'wie hoort erbij?'",
             "Onrust door wisselende routines tussen twee huizen",
-            "Onuitgesproken rouw of vergelijking met “hoe het vroeger was”",
+            "Onuitgesproken rouw of vergelijking met 'hoe het vroeger was'",
           ]}
           theory="Ritme en rituelen dragen bij aan voorspelbaarheid, herkenning en betekenisgeving. In samengestelde gezinnen vraagt dit bewuste afstemming, omdat meerdere geschiedenissen en tradities samenkomen."
           tools={[
@@ -167,9 +167,9 @@ export default function MethodePage() {
         />
 
         {/* AFSLUITING */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-teal-900 p-10 sm:p-14 text-white shadow-xl">
-          <div className="pointer-events-none absolute -right-32 -top-32 h-64 w-64 rounded-full bg-teal-500/15 blur-2xl" />
-          <div className="pointer-events-none absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-rose-500/15 blur-2xl" />
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0E2A47] via-[#0E2A47] to-[#2C4B9A] p-10 sm:p-14 text-white shadow-xl">
+          <div className="pointer-events-none absolute -right-32 -top-32 h-64 w-64 rounded-full bg-[#17B3B0]/15 blur-2xl" />
+          <div className="pointer-events-none absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-[#F02B8A]/12 blur-2xl" />
 
           <div className="relative space-y-6 max-w-3xl">
             <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight">
@@ -190,13 +190,13 @@ export default function MethodePage() {
             <div className="flex flex-wrap gap-4 pt-2">
               <Link
                 href="/training-certificering"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-slate-900 hover:bg-slate-50 transition shadow-md"
+                className="inline-flex items-center justify-center rounded-full bg-[#17B3B0] px-8 py-4 text-base font-semibold text-white hover:bg-[#149390] transition shadow-lg"
               >
                 Bekijk de training
               </Link>
               <Link
                 href="/materialen-tools"
-                className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur px-8 py-4 text-base font-semibold text-white hover:bg-white/15 transition border border-white/20"
+                className="inline-flex items-center justify-center rounded-full bg-transparent px-8 py-4 text-base font-semibold text-white hover:bg-white/10 transition border-2 border-white"
               >
                 Tools & materialen
               </Link>
@@ -218,7 +218,7 @@ function PijlerBlock({
   tools,
 }: {
   n: string;
-  accent: "teal" | "rose" | "slate";
+  accent: "teal" | "magenta" | "blue" | "slate";
   title: string;
   intro: string;
   signals: string[];
@@ -228,25 +228,36 @@ function PijlerBlock({
   const accentStyles =
     accent === "teal"
       ? {
-          border: "border-teal-100",
-          bg: "from-teal-50 via-white to-white",
-          badge: "bg-teal-100 text-teal-800",
-          dot: "text-teal-600",
-          check: "text-teal-700",
-          blob: "from-teal-200/25 to-teal-300/15",
-          rail: "bg-teal-700",
-          toolsBox: "bg-teal-50 border-teal-100",
+          border: "border-[#17B3B0]/20",
+          bg: "from-[#17B3B0]/10 via-white to-white",
+          badge: "bg-[#17B3B0]/15 text-[#0E2A47]",
+          dot: "text-[#17B3B0]",
+          check: "text-[#2C4B9A]",
+          blob: "from-[#17B3B0]/25 to-[#2C4B9A]/12",
+          rail: "bg-[#17B3B0]",
+          toolsBox: "bg-[#17B3B0]/8 border-[#17B3B0]/20",
         }
-      : accent === "rose"
+      : accent === "magenta"
       ? {
-          border: "border-rose-100",
-          bg: "from-rose-50 via-white to-white",
-          badge: "bg-rose-100 text-rose-800",
-          dot: "text-rose-600",
-          check: "text-rose-700",
-          blob: "from-rose-200/25 to-pink-300/15",
-          rail: "bg-rose-700",
-          toolsBox: "bg-rose-50 border-rose-100",
+          border: "border-[#F02B8A]/18",
+          bg: "from-[#F02B8A]/8 via-white to-white",
+          badge: "bg-[#F02B8A]/14 text-[#0E2A47]",
+          dot: "text-[#F02B8A]",
+          check: "text-[#2C4B9A]",
+          blob: "from-[#F02B8A]/20 to-[#2C4B9A]/10",
+          rail: "bg-[#F02B8A]",
+          toolsBox: "bg-[#F02B8A]/6 border-[#F02B8A]/18",
+        }
+      : accent === "blue"
+      ? {
+          border: "border-[#2C4B9A]/18",
+          bg: "from-[#2C4B9A]/8 via-white to-white",
+          badge: "bg-[#2C4B9A]/14 text-[#0E2A47]",
+          dot: "text-[#2C4B9A]",
+          check: "text-[#2C4B9A]",
+          blob: "from-[#2C4B9A]/20 to-[#17B3B0]/10",
+          rail: "bg-[#2C4B9A]",
+          toolsBox: "bg-[#2C4B9A]/6 border-[#2C4B9A]/18",
         }
       : {
           border: "border-slate-200",
@@ -261,14 +272,14 @@ function PijlerBlock({
 
   return (
     <section className="relative">
-      <div 
-        className={
-          `relative overflow-hidden rounded-3xl border bg-gradient-to-br p-8 lg:p-12 shadow-md ${accentStyles.border} ${accentStyles.bg}`
-        }
+      <div
+        className={`relative overflow-hidden rounded-3xl border bg-gradient-to-br p-8 lg:p-12 shadow-md ${accentStyles.border} ${accentStyles.bg}`}
       >
-        {/* accent rail (in de card, strak op mobiel) */}
+        {/* accent rail */}
         <div className={`absolute left-0 top-0 h-full w-2 ${accentStyles.rail}`} />
-        <div className={`pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br ${accentStyles.blob}`} />
+        <div
+          className={`pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br ${accentStyles.blob}`}
+        />
 
         <div className="relative space-y-6">
           <div className={`inline-flex items-center gap-3 rounded-full px-4 py-2 ${accentStyles.badge}`}>
@@ -276,7 +287,7 @@ function PijlerBlock({
             <span className="text-xs font-bold uppercase tracking-[0.2em]">Pijler</span>
           </div>
 
-          <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-[#0E2A47]">
             {title}
           </h2>
 

@@ -54,35 +54,63 @@ export default function FAQPage() {
     <div className="space-y-14">
       {/* Intro */}
       <section className="space-y-5 border-b border-slate-200 pb-10">
-        <p className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">
-          Veelgestelde Vragen
+        <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#2C4B9A]">
+          Veelgestelde vragen
         </p>
 
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 max-w-4xl">
+        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#0E2A47] max-w-4xl">
           Veelgestelde vragen over de Stiefkompas-methodiek
         </h1>
 
         <p className="text-sm md:text-base text-slate-700 max-w-3xl leading-relaxed">
-          Hieronder vind je antwoord op de meest voorkomende vragen over de 
-          methodiek, de wetenschappelijke basis, training en professioneel gebruik van Stiefkompas.
+          Hieronder vind je antwoord op de meest voorkomende vragen over de
+          methodiek, de wetenschappelijke basis, training en professioneel gebruik
+          van Stiefkompas.
         </p>
       </section>
 
       {/* FAQ lijst */}
-      <section className="space-y-8 max-w-3xl">
-        {faqItems.map((item, i) => (
-          <div key={i} className="space-y-2">
-            <h2 className="text-lg font-semibold text-slate-900 tracking-tight">
-              {item.q}
-            </h2>
-            <p className="text-sm text-slate-700 leading-relaxed">{item.a}</p>
-          </div>
-        ))}
+      <section className="space-y-10 max-w-3xl">
+        {faqItems.map((item, i) => {
+          // subtiele afwisseling in accent (teal / magenta / blue)
+          const accent =
+            i % 3 === 0 ? "teal" : i % 3 === 1 ? "magenta" : "blue";
+
+          const accentColor =
+            accent === "teal"
+              ? "text-[#17B3B0]"
+              : accent === "magenta"
+              ? "text-[#F02B8A]"
+              : "text-[#2C4B9A]";
+
+          const borderColor =
+            accent === "teal"
+              ? "border-[#17B3B0]/20"
+              : accent === "magenta"
+              ? "border-[#F02B8A]/20"
+              : "border-[#2C4B9A]/20";
+
+          return (
+            <div
+              key={i}
+              className={`rounded-2xl border ${borderColor} bg-white p-6 shadow-sm`}
+            >
+              <h2
+                className={`text-lg font-semibold tracking-tight mb-2 ${accentColor}`}
+              >
+                {item.q}
+              </h2>
+              <p className="text-sm text-slate-700 leading-relaxed">
+                {item.a}
+              </p>
+            </div>
+          );
+        })}
       </section>
 
       {/* CTA */}
       <section className="border-t border-slate-200 pt-10 max-w-3xl space-y-4 pb-4">
-        <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-slate-900">
+        <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-[#0E2A47]">
           Staat jouw vraag er niet tussen?
         </h2>
         <p className="text-sm md:text-base text-slate-700 leading-relaxed">
@@ -90,7 +118,7 @@ export default function FAQPage() {
         </p>
         <a
           href="/contact"
-          className="inline-flex rounded-full border border-slate-900 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-slate-900 hover:bg-slate-900 hover:text-white transition"
+          className="inline-flex rounded-full border border-[#0E2A47] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#0E2A47] hover:bg-[#0E2A47] hover:text-white transition"
         >
           Contact opnemen
         </a>
