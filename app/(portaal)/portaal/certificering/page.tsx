@@ -1,7 +1,9 @@
+"use server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/lib/supabase/server";
 import { modules, SECTION_ORDER } from "../leren/_content";
+import { startExamAction, markPassedAction, purchaseCertification } from './actions'
 
 const REQUIRED_MODULES = ["module-1-theorie", "module-2-tools"] as const;
 
@@ -17,8 +19,8 @@ type CertificationRow = {
   exam_started_at: string | null;
   exam_passed_at: string | null;
   score: number | null;
-  valid_from: string | null;   // date
-  valid_until: string | null;  // date
+  valid_from: string | null;
+  valid_until: string | null;
 } | null;
 
 function buildCompletedMap(rows: ProgressRow[]) {
@@ -80,61 +82,6 @@ function formatDate(dateStr: string | null | undefined) {
   } catch {
     return dateStr;
   }
-}
-
-// ✅ Test actions (later vervangen door echte toetsflow / webhook)
-async function startExamAction() {
-  "use server";
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) redirect("/login");
-
-  const { error } = await supabase
-    .from("user_certifications")
-    .update({ exam_started_at: new Date().toISOString() })
-    .eq("user_id", user.id);
-
-  if (error) {
-    console.error("startExamAction failed:", error);
-  }
-
-  redirect("/portaal/certificering");
-}
-
-async function markPassedAction() {
-  "use server";
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) redirect("/login");
-
-  // eenvoudige test: zet passed + validity 1 jaar
-  const now = new Date();
-  const validFrom = now.toISOString().slice(0, 10); // YYYY-MM-DD
-  const validUntil = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate())
-    .toISOString()
-    .slice(0, 10);
-
-  const { error } = await supabase
-    .from("user_certifications")
-    .update({
-      exam_passed_at: new Date().toISOString(),
-      score: 100,
-      valid_from: validFrom,
-      valid_until: validUntil,
-    })
-    .eq("user_id", user.id);
-
-  if (error) {
-    console.error("markPassedAction failed:", error);
-  }
-
-  redirect("/portaal/certificering");
 }
 
 export default async function CertificationPage({

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, User } from "lucide-react";
+import { SearchDialog } from "./search-dialog"; // ← NIEUWE IMPORT
 
 type MenuLink = { label: string; href: string };
 type MenuItem = { label: string; items?: MenuLink[]; href?: string };
@@ -26,6 +27,7 @@ const MENU: MenuItem[] = [
       { label: "Voor coaches", href: "/voor-coaches" },
       { label: "Training & certificering", href: "/training-certificering" },
       { label: "Materialen & tools", href: "/materialen-tools" },
+      { label: "Inschrijven & Tarieven", href: "/inschrijven#tarieven" },
       { label: "Ontwikkelaar", href: "/ontwikkelaar" },
     ],
   },
@@ -39,6 +41,7 @@ export default function SiteHeader() {
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
+  // Sluit dropdowns na navigatie
   useEffect(() => {
     setOpen(null);
     setMobileOpen(false);
@@ -53,7 +56,7 @@ export default function SiteHeader() {
           {/* Logo + losse tagline */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <Image
-              src="/logo-stiefkompas.svg" // logo ZONDER slogan
+              src="/logo-stiefkompas.svg"
               alt="Stiefkompas"
               width={260}
               height={110}
@@ -61,7 +64,6 @@ export default function SiteHeader() {
               priority
             />
 
-            {/* Tagline als aparte tekstregel */}
             <div className="hidden lg:block pl-6 border-l border-slate-200">
               <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[#2C4B9A]">
                 Samen een richting vinden
@@ -72,7 +74,7 @@ export default function SiteHeader() {
             </div>
           </Link>
 
-          {/* Desktop menu - centered */}
+          {/* Desktop menu */}
           <nav className="hidden md:flex items-center justify-center gap-1 flex-1">
             {MENU.map((item) =>
               item.items ? (
@@ -116,13 +118,17 @@ export default function SiteHeader() {
                             >
                               <ChevronDown
                                 className={`h-4 w-4 shrink-0 -rotate-90 transition-transform duration-200 ${
-                                  hoveredItem === sub.href || isActive ? "rotate-0 text-[#17B3B0]" : ""
+                                  hoveredItem === sub.href || isActive
+                                    ? "rotate-0 text-[#17B3B0]"
+                                    : ""
                                 }`}
                               />
                               <span className="flex-1">{sub.label}</span>
                               <span
                                 className={`h-2 w-2 rounded-full ${
-                                  isActive ? "bg-[#17B3B0]" : "bg-transparent group-hover:bg-[#F02B8A]/30"
+                                  isActive
+                                    ? "bg-[#17B3B0]"
+                                    : "bg-transparent group-hover:bg-[#F02B8A]/30"
                                 }`}
                               />
                             </Link>
@@ -144,9 +150,14 @@ export default function SiteHeader() {
             )}
           </nav>
 
-          {/* Actions (rechts) */}
+          {/* Actions */}
           <div className="flex items-center gap-3 shrink-0">
-            {/* Desktop login - icon only */}
+            {/* Desktop search - VERVANGEN DOOR SearchDialog */}
+            <div className="hidden md:block">
+              <SearchDialog />
+            </div>
+
+            {/* Desktop login */}
             <Link
               href="/login"
               className="hidden md:inline-flex items-center justify-center h-11 w-11 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-[#0E2A47]"
@@ -155,7 +166,7 @@ export default function SiteHeader() {
               <User className="h-5 w-5" />
             </Link>
 
-            {/* Mobile: hamburger */}
+            {/* Mobile hamburger */}
             <button
               type="button"
               className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-[#0E2A47]"
@@ -167,7 +178,7 @@ export default function SiteHeader() {
           </div>
         </div>
 
-        {/* Tagline op mobiel/tablet (onder de header-rij) */}
+        {/* Tagline op mobiel/tablet */}
         <div className="lg:hidden pb-3 -mt-2">
           <div className="text-xs font-semibold tracking-[0.18em] uppercase text-[#2C4B9A]">
             Samen een richting vinden
@@ -178,6 +189,11 @@ export default function SiteHeader() {
         {mobileOpen && (
           <div className="md:hidden pb-4">
             <div className="rounded-2xl border border-slate-200 bg-white p-2">
+              {/* Mobile search - VERVANGEN DOOR SearchDialog */}
+              <div className="mb-2">
+                <SearchDialog />
+              </div>
+
               {MENU.map((item) => (
                 <div key={item.label} className="border-b last:border-b-0 border-slate-100 py-2">
                   {item.href ? (
@@ -206,22 +222,15 @@ export default function SiteHeader() {
 
                       {mobileSubmenuOpen === item.label && (
                         <div className="pl-3 mt-1">
-                          {item.items?.map((s) => {
-                            const isActive = pathname === s.href;
-                            return (
-                              <Link
-                                key={s.href}
-                                href={s.href}
-                                className={`block rounded-xl px-4 py-3 text-base transition-all ${
-                                  isActive
-                                    ? "bg-[#17B3B0]/10 text-[#0E2A47] border-l-4 border-[#17B3B0] font-semibold"
-                                    : "text-slate-700 hover:bg-slate-50 hover:text-[#0E2A47]"
-                                }`}
-                              >
-                                {s.label}
-                              </Link>
-                            );
-                          })}
+                          {item.items?.map((s) => (
+                            <Link
+                              key={s.href}
+                              href={s.href}
+                              className="block rounded-xl px-4 py-3 text-base text-slate-700 hover:bg-slate-50 hover:text-[#0E2A47]"
+                            >
+                              {s.label}
+                            </Link>
+                          ))}
                         </div>
                       )}
                     </>

@@ -32,10 +32,41 @@ export default function HomePage() {
               Stiefkompas geeft richting in de complexiteit van samengestelde gezinnen
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              Een methodiek die coaches structuur, overzicht en concrete tools biedt om gezinnen
-              planmatig te begeleiden — zonder het menselijke uit het oog te verliezen.
-            </p>
+            {/* 🔥 MEER INHOUD IN HET EERSTE BLOK */}
+            <div className="space-y-4 max-w-2xl">
+              <p className="text-lg sm:text-xl text-slate-600 leading-relaxed">
+                Een methodiek die coaches structuur, overzicht en concrete tools biedt om gezinnen
+                planmatig te begeleiden — zonder het menselijke uit het oog te verliezen.
+              </p>
+
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+                Samengestelde gezinnen hebben vaak te maken met meerdere loyaliteiten, verschillen in
+                opvoedstijl, verlieservaringen en uiteenlopende tempo’s. Daardoor voelt begeleiding al
+                snel “gelaagd” en onoverzichtelijk. Stiefkompas helpt je om die gelaagdheid te ordenen,
+                taal te geven aan wat er speelt, en samen met het gezin te bepalen wat nu het meest
+                helpend is.
+              </p>
+
+              <div className="rounded-3xl border border-slate-200 bg-white/70 backdrop-blur-sm p-5 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-700 mb-3">
+                  Wat je krijgt met Stiefkompas
+                </p>
+                <ul className="grid gap-2 text-sm sm:text-base text-slate-700">
+                  <li className="flex gap-3">
+                    <span className="text-teal-700">✓</span>
+                    <span>Een helder model (Kompasmodel) met vijf pijlers als gezamenlijke taal</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-teal-700">✓</span>
+                    <span>Tools en werkvormen om gesprekken concreet te maken en keuzes vast te leggen</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-teal-700">✓</span>
+                    <span>Een methodische route: van duiden → naar planvorming → naar passende interventies</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-3">
@@ -53,6 +84,12 @@ export default function HomePage() {
                 Scholing & certificering
               </Link>
             </div>
+
+            {/* mini trust line */}
+            <p className="text-sm text-slate-500 leading-relaxed max-w-2xl">
+              Ontwikkeld voor professionals die gezinnen willen begeleiden met overzicht en rust — ook
+              wanneer de situatie complex en emotioneel beladen is.
+            </p>
           </div>
         </div>
       </section>
@@ -237,17 +274,31 @@ function FeatureCard({
       : "from-rose-100 to-rose-200";
 
   const eyebrow =
-    accent === "rose" ? "text-rose-700" : accent === "teal" ? "text-teal-700" : "text-teal-800";
+    accent === "rose"
+      ? "text-rose-700"
+      : accent === "teal"
+      ? "text-teal-700"
+      : "text-teal-800";
 
   return (
     <div className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-md border border-stone-200 hover:shadow-lg transition-all">
-      <div className={`absolute -right-20 -bottom-20 h-40 w-40 rounded-full bg-gradient-to-br ${accentBg} opacity-50`} />
+      <div
+        className={`absolute -right-20 -bottom-20 h-40 w-40 rounded-full bg-gradient-to-br ${accentBg} opacity-50`}
+      />
       <div className="relative space-y-4">
         <h3 className={`text-sm font-bold uppercase tracking-[0.2em] ${eyebrow}`}>{title}</h3>
         <p className="text-base text-slate-700 leading-relaxed">{text}</p>
-        <Link href={href} className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-teal-700 transition-colors group">
+        <Link
+          href={href}
+          className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-teal-700 transition-colors group"
+        >
           {hrefLabel}
-          <svg className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </Link>

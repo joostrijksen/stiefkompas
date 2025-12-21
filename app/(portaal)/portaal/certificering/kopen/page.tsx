@@ -1,3 +1,4 @@
+import { purchaseCertification } from "../actions";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/lib/supabase/server";
@@ -66,60 +67,6 @@ function computeEligibility(completedMap: Map<string, Map<string, Set<string>>>)
   return { eligible, perModule };
 }
 
-async function purchaseCertification(formData: FormData) {
-  "use server";
-
-  const force = formData.get("force") === "1";
-
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) redirect("/login");
-
-  // ✅ Gate ook in server action (behalve force)
-  const { data: completedRows, error: progressError } = await supabase
-    .from("user_progress")
-    .select("module_slug, lesson_slug, section_id")
-    .eq("user_id", user.id)
-    .eq("status", "completed");
-
-  if (progressError) {
-    console.error("Failed to read user_progress:", progressError);
-    redirect(`/portaal/certificering/kopen?error=progress_read_failed`);
-  }
-
-  const completedMap = buildCompletedMap((completedRows ?? []) as ProgressRow[]);
-  const { eligible } = computeEligibility(completedMap);
-
-  if (!force && !eligible) {
-    redirect(`/portaal/certificering/kopen?error=not_eligible`);
-  }
-
-  const { error } = await supabase.from("user_certifications").upsert(
-    {
-      user_id: user.id,
-      purchased_at: new Date().toISOString(),
-      purchase_source: "manual_test",
-      purchase_ref: null,
-      valid_from: null,
-      valid_until: null,
-    },
-    { onConflict: "user_id" }
-  );
-
-  if (error) {
-    console.error("purchaseCertification failed:", error);
-    redirect(
-      `/portaal/certificering/kopen?error=${encodeURIComponent(
-        error.message ?? "upsert_failed"
-      )}`
-    );
-  }
-
-  redirect("/portaal/certificering");
-}
 
 export default async function CertificationPurchasePage({
   searchParams,
