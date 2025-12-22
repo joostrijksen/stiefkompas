@@ -30,6 +30,17 @@ const ASSESSED_ON = [
   "Professionele verslaglegging: helder, toetsbaar en zorgvuldig",
 ];
 
+// CTA styles (leesbaar op elke achtergrond)
+const CTA_PRIMARY =
+  "inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] transition " +
+  "border border-[#2C4B9A]/25 bg-[#2C4B9A]/12 text-[#0E2A47] " +
+  "hover:bg-[#2C4B9A]/18 hover:border-[#2C4B9A]/35 focus:outline-none focus:ring-2 focus:ring-[#2C4B9A]/20";
+
+const CTA_SECONDARY =
+  "inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] transition " +
+  "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 " +
+  "focus:outline-none focus:ring-2 focus:ring-slate-200";
+
 export default function CertificeringPage() {
   return (
     <div className="relative bg-white">
@@ -61,10 +72,10 @@ export default function CertificeringPage() {
             </h1>
 
             <p className="text-sm md:text-base text-slate-700 leading-relaxed">
-              Certificering toont aan dat je Stiefkompas <span className="font-semibold">methodisch</span>{" "}
-              kunt toepassen in begeleiding. Je laat zien dat je situaties kunt ordenen, keuzes kunt
-              onderbouwen en interventies passend kunt faseren — met zorgvuldig en functioneel gebruik
-              van de officiële tools.
+              Certificering toont aan dat je Stiefkompas{" "}
+              <span className="font-semibold">methodisch</span> kunt toepassen in begeleiding.
+              Je laat zien dat je situaties kunt ordenen, keuzes kunt onderbouwen en interventies
+              passend kunt faseren — met zorgvuldig en functioneel gebruik van de officiële tools.
             </p>
 
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -73,17 +84,11 @@ export default function CertificeringPage() {
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
-              <Link
-                href="/inschrijven#tarieven"
-                className="inline-flex items-center justify-center rounded-full bg-[#0E2A47] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:opacity-90 transition"
-              >
+              <Link href="/inschrijven#tarieven" className={CTA_PRIMARY}>
                 Start certificering
               </Link>
 
-              <Link
-                href="/training-certificering"
-                className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700 hover:bg-slate-50 transition"
-              >
+              <Link href="/training-certificering" className={CTA_SECONDARY}>
                 Terug naar overzicht
               </Link>
             </div>
@@ -182,10 +187,7 @@ export default function CertificeringPage() {
               </p>
             </div>
 
-            <Link
-              href="/inschrijven#tarieven"
-              className="inline-flex w-full items-center justify-center rounded-full bg-[#0E2A47] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:opacity-90 transition"
-            >
+            <Link href="/inschrijven#tarieven" className={CTA_PRIMARY + " w-full"}>
               Start certificering
             </Link>
 
@@ -193,10 +195,7 @@ export default function CertificeringPage() {
               Twijfel je of certificering nu al past? Bekijk eerst Module 1 en 2, of stem even af.
             </div>
 
-            <Link
-              href="/contact"
-              className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700 hover:bg-slate-50 transition"
-            >
+            <Link href="/contact" className={CTA_SECONDARY + " w-full"}>
               Contact
             </Link>
           </div>
@@ -213,24 +212,15 @@ export default function CertificeringPage() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/opleiding/module-1"
-              className="inline-flex items-center justify-center rounded-full border border-slate-200 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700 hover:bg-slate-50 transition"
-            >
+            <Link href="/opleiding/module-1" className={CTA_SECONDARY}>
               Lees over Module 1
             </Link>
 
-            <Link
-              href="/opleiding/module-2"
-              className="inline-flex items-center justify-center rounded-full border border-slate-200 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700 hover:bg-slate-50 transition"
-            >
+            <Link href="/opleiding/module-2" className={CTA_SECONDARY}>
               Lees over Module 2
             </Link>
 
-            <Link
-              href="/inschrijven#tarieven"
-              className="inline-flex items-center justify-center rounded-full bg-[#0E2A47] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:opacity-90 transition"
-            >
+            <Link href="/inschrijven#tarieven" className={CTA_PRIMARY}>
               Naar tarieven & inschrijven
             </Link>
           </div>

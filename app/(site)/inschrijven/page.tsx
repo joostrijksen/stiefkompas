@@ -15,15 +15,19 @@ type Plan = {
   key: PlanKey;
   badge: string;
   title: string;
-  price: string;
+
+  // Optie 2: toon beide
+  priceIncl: string; // incl. btw
+  priceExcl: string; // excl. btw
+
   note?: string;
-  extraTopLine?: string; // extra regel voor gelijke card-ritme
+  extraTopLine?: string;
   highlights: string[];
   tone: "teal" | "blue" | "pink";
   primaryCta: string;
   secondaryCta: { href: string; label: string };
-  footnote: string; // ondertekst (overal)
-  extraFootnote?: string; // optioneel, extra regel (bijv. certificering)
+  footnote: string;
+  extraFootnote?: string;
 };
 
 const PLANS: Plan[] = [
@@ -31,7 +35,8 @@ const PLANS: Plan[] = [
     key: "module1",
     badge: "Start",
     title: "Module 1 — Basis van de methodiek",
-    price: "€ 495",
+    priceIncl: "€ 495",
+    priceExcl: "€ 409,09",
     note: "Online, in je eigen tempo",
     extraTopLine: "Geen voorkennis vereist",
     highlights: [
@@ -49,7 +54,8 @@ const PLANS: Plan[] = [
     key: "module2",
     badge: "Verdieping",
     title: "Module 2 — Toepassing in de praktijk",
-    price: "€ 595",
+    priceIncl: "€ 495", // aangepast
+    priceExcl: "€ 409,09", // 495 / 1,21
     note: "Voor professionals die willen toepassen",
     highlights: [
       "Methodisch handelen: analyse → plan → interventie",
@@ -66,7 +72,8 @@ const PLANS: Plan[] = [
     key: "cert",
     badge: "Certificering",
     title: "Toets + 1× herkansing + certificering",
-    price: "€ 195",
+    priceIncl: "€ 195",
+    priceExcl: "€ 161,16", // 195 / 1,21
     note: "Na afronding van Modules 1 & 2",
     highlights: [
       "Toetsing op begrip & toepassing",
@@ -85,7 +92,8 @@ const PLANS: Plan[] = [
     key: "bundle",
     badge: "Meest gekozen",
     title: "Complete route — Module 1 + 2 + Toets & certificering",
-    price: "€ 995",
+    priceIncl: "€ 995",
+    priceExcl: "€ 822,31", // 995 / 1,21
     note: "Alles in één keer geregeld",
     highlights: [
       "Module 1 + Module 2 (volledige leerroute)",
@@ -106,10 +114,8 @@ function toneClasses(tone: Plan["tone"]) {
       ring: "border-[#17B3B0]/20",
       pill: "bg-[#17B3B0]/10 text-[#0E2A47]",
       accent: "text-[#17B3B0]",
-      // CTA donker + WITTE tekst (leesbaar)
       button: "bg-[#0E2A47] text-white hover:opacity-90",
-      infoBtn:
-        "border-[#17B3B0]/30 bg-[#17B3B0]/10 text-[#0E2A47] hover:bg-[#17B3B0]/15",
+      infoBtn: "border-[#17B3B0]/30 bg-[#17B3B0]/10 text-[#0E2A47] hover:bg-[#17B3B0]/15",
     };
   }
   if (tone === "blue") {
@@ -118,8 +124,7 @@ function toneClasses(tone: Plan["tone"]) {
       pill: "bg-[#2C4B9A]/10 text-[#0E2A47]",
       accent: "text-[#2C4B9A]",
       button: "bg-[#0E2A47] text-white hover:opacity-90",
-      infoBtn:
-        "border-[#2C4B9A]/30 bg-[#2C4B9A]/10 text-[#0E2A47] hover:bg-[#2C4B9A]/15",
+      infoBtn: "border-[#2C4B9A]/30 bg-[#2C4B9A]/10 text-[#0E2A47] hover:bg-[#2C4B9A]/15",
     };
   }
   return {
@@ -127,8 +132,7 @@ function toneClasses(tone: Plan["tone"]) {
     pill: "bg-[#F02B8A]/10 text-[#0E2A47]",
     accent: "text-[#F02B8A]",
     button: "bg-[#0E2A47] text-white hover:opacity-90",
-    infoBtn:
-      "border-[#F02B8A]/25 bg-[#F02B8A]/10 text-[#0E2A47] hover:bg-[#F02B8A]/15",
+    infoBtn: "border-[#F02B8A]/25 bg-[#F02B8A]/10 text-[#0E2A47] hover:bg-[#F02B8A]/15",
   };
 }
 
@@ -149,8 +153,7 @@ async function startCheckout(formData: FormData) {
   const host = forwardedHost ?? h.get("host");
 
   const proto =
-    forwardedProto ??
-    (process.env.NODE_ENV === "development" ? "http" : "https");
+    forwardedProto ?? (process.env.NODE_ENV === "development" ? "http" : "https");
 
   const origin =
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
@@ -242,6 +245,10 @@ export default function InschrijvenPage() {
           <p className="text-sm md:text-base text-slate-700 leading-relaxed">
             Kies wat bij je past: los starten, verdiepen, certificeren of alles in één keer.
           </p>
+          <p className="text-xs text-slate-500">
+            Alle bedragen worden getoond <span className="font-semibold">incl. btw</span>, met daaronder
+            het bedrag <span className="font-semibold">excl. btw</span>.
+          </p>
         </div>
 
         <section className="grid gap-8 lg:grid-cols-3">
@@ -258,7 +265,6 @@ export default function InschrijvenPage() {
                   featured ? "lg:col-span-3" : "",
                 ].join(" ")}
               >
-                {/* card flex -> CTA altijd onderaan */}
                 <div className="flex h-full flex-col">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <span
@@ -270,8 +276,14 @@ export default function InschrijvenPage() {
                       {plan.badge}
                     </span>
 
-                    <div className={`text-sm font-semibold ${t.accent}`}>
-                      {plan.price}
+                    {/* Optie 2: incl + excl */}
+                    <div className="text-right">
+                      <div className={`text-sm font-semibold ${t.accent}`}>
+                        {plan.priceIncl} <span className="text-slate-600 font-medium">incl. btw</span>
+                      </div>
+                      <div className="text-[11px] text-slate-500">
+                        {plan.priceExcl} excl. btw
+                      </div>
                     </div>
                   </div>
 
@@ -279,7 +291,6 @@ export default function InschrijvenPage() {
                     {plan.title}
                   </h3>
 
-                  {/* note + extraTopLine altijd renderen (met min-height) voor gelijke hoogte */}
                   <div className="mt-2 min-h-[52px] space-y-2">
                     {plan.note ? (
                       <p className="text-sm text-slate-600 leading-relaxed">{plan.note}</p>
@@ -303,7 +314,6 @@ export default function InschrijvenPage() {
                     ))}
                   </ul>
 
-                  {/* CTA onderaan */}
                   <div className="mt-auto pt-6">
                     <div className="flex flex-col gap-3">
                       <form action={startCheckout} className="w-full">
@@ -332,7 +342,6 @@ export default function InschrijvenPage() {
                       </Link>
                     </div>
 
-                    {/* Ondertekst: vaste ruimte zodat kaarten mooi gelijk ogen */}
                     <div className="mt-3 min-h-[44px]">
                       <p className="text-xs text-slate-500 leading-relaxed">{plan.footnote}</p>
                     </div>
