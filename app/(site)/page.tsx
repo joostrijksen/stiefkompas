@@ -1,132 +1,307 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { KompasModel } from "../components/kompas-model";
+import { KompasModel } from "@/app/components/kompasmodel";
+
+export const metadata: Metadata = {
+  title: "Stiefkompas – Methodiek voor samengestelde gezinnen",
+  description:
+    "Een methodiek voor professionals die met samengestelde gezinnen werken. Structuur, overzicht en concrete tools voor planmatige begeleiding.",
+};
+
+const INK = "#0E2A47";
+const TEXT = "rgba(14, 42, 71, 0.72)";
+const BORDER = "rgba(14, 42, 71, 0.14)";
+
+// public/
+const HERO_BG_SRC = "/hero-stiefkompasv8.png";
+
+// tunen
+const HERO_IMG_OPACITY = 0.33; // 0.25–0.42 is meestal mooi
+const NEXT_BG = "rgba(248,250,252,1)"; // slate-50
 
 export default function HomePage() {
   return (
-    <div className="relative bg-white">
-      {/* HERO SECTION */}
-      <section className="relative min-h-[82vh] overflow-hidden bg-gradient-to-br from-slate-50 via-white to-stone-50">
-        {/* Organische vormen (zachter, rustiger) */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div className="relative overflow-hidden bg-white">
+      {/* Achtergrond accentlaag */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div
+          className="absolute -top-[140px] -left-[220px] h-[760px] w-[760px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(44,75,154,0.18) 0%, rgba(44,75,154,0) 68%)",
+          }}
+        />
+        <div
+          className="absolute top-[120px] -right-[280px] h-[860px] w-[860px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(23,179,176,0.16) 0%, rgba(23,179,176,0) 70%)",
+          }}
+        />
+        <div
+          className="absolute -bottom-[420px] left-[18%] h-[1100px] w-[1100px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(14,42,71,0.12) 0%, rgba(14,42,71,0) 72%)",
+          }}
+        />
+        <div
+          className="absolute left-1/2 top-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(44,75,154,0.08) 0%, rgba(44,75,154,0) 74%)",
+          }}
+        />
+      </div>
+
+      {/* Content laag */}
+      <div className="relative z-10">
+        {/* HERO */}
+        <section className="relative py-20 lg:py-32 overflow-hidden">
+          {/* Afbeelding achter de hero: duidelijker en warmer */}
+          <div className="pointer-events-none absolute inset-0 z-0">
+            <Image
+              src={HERO_BG_SRC}
+              alt=""
+              fill
+              priority
+              className="object-cover object-center"
+              style={{
+                opacity: HERO_IMG_OPACITY,
+                filter: "saturate(1.35) contrast(1.1) brightness(1.02)",
+              }}
+            />
+          </div>
+
+          {/* Leesbaarheid overlay: warm, maar niet te wit */}
           <div
-            className="absolute -right-[18%] top-[8%] h-[520px] w-[520px] rounded-[60%_40%_30%_70%/60%_30%_70%_40%] bg-gradient-to-br from-rose-200/40 to-rose-300/25 blur-2xl"
-            style={{ transform: "rotate(-12deg)" }}
+            className="pointer-events-none absolute inset-0 z-[1]"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(255, 246, 235, 0.40) 0%, rgba(255, 255, 255, 0.52) 55%, rgba(255, 255, 255, 0.58) 100%)",
+            }}
           />
+
+          {/* Zachte vignette rond tekstblok */}
           <div
-            className="absolute -left-[14%] bottom-[0%] h-[620px] w-[620px] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] bg-gradient-to-tr from-teal-200/35 to-teal-300/20 blur-2xl"
-            style={{ transform: "rotate(18deg)" }}
+            className="pointer-events-none absolute inset-0 z-[1]"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 46%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.40) 48%, rgba(255,255,255,0.62) 100%)",
+            }}
           />
-        </div>
 
-        {/* Content */}
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-28">
-          <div className="max-w-3xl space-y-8">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur-sm px-4 py-2 shadow-sm border border-slate-200/60">
-              <span className="h-2 w-2 rounded-full bg-teal-600" />
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">
-                Methodiek voor samengestelde gezinnen
-              </span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.08]">
-              Stiefkompas geeft richting in de complexiteit van samengestelde gezinnen
-            </h1>
-
-            {/* 🔥 MEER INHOUD IN HET EERSTE BLOK */}
-            <div className="space-y-4 max-w-2xl">
-              <p className="text-lg sm:text-xl text-slate-600 leading-relaxed">
-                Een methodiek die coaches structuur, overzicht en concrete tools biedt om gezinnen
-                planmatig te begeleiden — zonder het menselijke uit het oog te verliezen.
-              </p>
-
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-                Samengestelde gezinnen hebben vaak te maken met meerdere loyaliteiten, verschillen in
-                opvoedstijl, verlieservaringen en uiteenlopende tempo’s. Daardoor voelt begeleiding al
-                snel “gelaagd” en onoverzichtelijk. Stiefkompas helpt je om die gelaagdheid te ordenen,
-                taal te geven aan wat er speelt, en samen met het gezin te bepalen wat nu het meest
-                helpend is.
-              </p>
-
-              <div className="rounded-3xl border border-slate-200 bg-white/70 backdrop-blur-sm p-5 shadow-sm">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-700 mb-3">
-                  Wat je krijgt met Stiefkompas
-                </p>
-                <ul className="grid gap-2 text-sm sm:text-base text-slate-700">
-                  <li className="flex gap-3">
-                    <span className="text-teal-700">✓</span>
-                    <span>Een helder model (Kompasmodel) met vijf pijlers als gezamenlijke taal</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-teal-700">✓</span>
-                    <span>Tools en werkvormen om gesprekken concreet te maken en keuzes vast te leggen</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-teal-700">✓</span>
-                    <span>Een methodische route: van duiden → naar planvorming → naar passende interventies</span>
-                  </li>
-                </ul>
+          {/* Subtiel kompas grid */}
+          <div className="absolute inset-0 z-[2] flex items-center justify-center opacity-[0.05] pointer-events-none">
+            <div className="relative w-[820px] h-[820px]">
+              <div className="absolute inset-0 rounded-full" style={{ border: `1px solid rgba(14,42,71,0.12)` }} />
+              <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(14,42,71,0.10)" }} />
+              <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: "rgba(14,42,71,0.10)" }} />
+              <div className="absolute inset-0 rotate-45">
+                <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(14,42,71,0.06)" }} />
+                <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: "rgba(14,42,71,0.06)" }} />
               </div>
             </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 pt-3">
-              <Link
-                href="/methode"
-                className="inline-flex items-center justify-center rounded-full bg-teal-700 px-8 py-4 text-base font-semibold text-white hover:bg-teal-800 transition shadow-md"
-              >
-                Ontdek de methodiek
-              </Link>
-
-              <Link
-                href="/training-certificering"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-slate-900 hover:bg-slate-50 transition shadow-sm border border-slate-200"
-              >
-                Scholing & certificering
-              </Link>
-            </div>
-
-            {/* mini trust line */}
-            <p className="text-sm text-slate-500 leading-relaxed max-w-2xl">
-              Ontwikkeld voor professionals die gezinnen willen begeleiden met overzicht en rust — ook
-              wanneer de situatie complex en emotioneel beladen is.
-            </p>
           </div>
-        </div>
-      </section>
 
-      {/* CONTENT */}
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-20 space-y-28">
-        {/* 3 HIGHLIGHT CARDS */}
-        <section className="grid gap-8 md:grid-cols-3">
-          <Card tone="white" title="Voor coaches" eyebrowClass="text-teal-700" dotClass="bg-teal-100">
-            Ontwikkeld voor professionals die werken met samengestelde gezinnen,
-            ook als je geen specialistische voorkennis hebt.
-          </Card>
+          {/* Hero content */}
+          <div className="relative z-10 mx-auto max-w-5xl px-6">
+            <div className="text-center space-y-8">
+              <h1
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] max-w-4xl mx-auto"
+                style={{ color: INK }}
+              >
+                Stiefkompas geeft richting in de complexiteit van samengestelde gezinnen
+              </h1>
 
-          <Card tone="tint-rose" title="Rust & overzicht" eyebrowClass="text-rose-700" dotClass="bg-rose-200/60">
-            Je krijgt zicht op onderliggende patronen en weet wat eerst aandacht vraagt.
-          </Card>
+              <p className="text-xl leading-relaxed max-w-3xl mx-auto" style={{ color: TEXT }}>
+                Een methodiek voor sociaal werkers, coaches, gezinsbegeleiders en andere
+                hulpverleners die met samengestelde gezinnen werken. Zij krijgen structuur,
+                overzicht en concrete tools om gezinnen planmatig te begeleiden, met blijvende
+                aandacht voor relaties en afstemming.
+              </p>
 
-          <Card tone="white" title="Direct toepasbaar" eyebrowClass="text-slate-700" dotClass="bg-slate-100">
-            Concrete tools die je direct inzet in je sessies met gezinnen.
-          </Card>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                <Link
+                  href="/methode"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-xl hover:opacity-90 transition-all shadow-lg"
+                  style={{ background: INK, color: "#FFFFFF" }}
+                >
+                  Ontdek de methodiek
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+
+                <Link
+                  href="/training-certificering"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-xl hover:bg-white/60 transition-colors"
+                  style={{ color: INK, border: `2px solid ${INK}`, background: "rgba(255,255,255,0.35)" }}
+                >
+                  Scholing & certificering
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Mooie overgang naar de volgende sectie */}
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-32"
+            style={{
+              background: `linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(248,250,252,0.72) 55%, ${NEXT_BG} 100%)`,
+            }}
+          />
         </section>
 
-        {/* MODEL SECTION */}
-        <section className="grid gap-12 lg:grid-cols-2 items-center">
-          <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
-              Het Kompasmodel: vijf pijlers die richting geven
-            </h2>
-
-            <div className="space-y-4 text-base text-slate-600 leading-relaxed">
+        {/* WAAROM STIEFKOMPAS */}
+        <section className="relative py-24 lg:py-32" style={{ background: NEXT_BG }}>
+          <div className="mx-auto max-w-4xl px-6">
+            <div
+              className="space-y-8 text-lg leading-relaxed pl-8"
+              style={{ color: TEXT, borderLeft: `2px solid ${BORDER}` }}
+            >
               <p>
+                Samengestelde gezinnen hebben te maken met meerdere loyaliteiten, verschillen in
+                opvoedstijl, verlieservaringen en uiteenlopende tempo&apos;s. Deze samenloop van
+                factoren maakt begeleiding gelaagd en complex.
+              </p>
+              <p>
+                Stiefkompas helpt om deze gelaagdheid te ordenen, geeft taal aan wat er speelt,
+                en ondersteunt het gezin bij het bepalen van wat op dit moment het meest helpend
+                is.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* WAT JE KRIJGT MET STIEFKOMPAS */}
+        <section className="relative py-16 lg:py-24 bg-slate-50/65 backdrop-blur-[1px]">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center space-y-6 max-w-3xl mx-auto mb-16">
+              <h2
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight"
+                style={{ color: INK }}
+              >
+                Wat je krijgt met Stiefkompas
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Een helder en werkbaar analysekader",
+                  desc: "Vijf pijlers (het Kompasmodel) om gezinsdynamiek te ordenen en samenhang zichtbaar te maken",
+                  icon:
+                    "M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7",
+                },
+                {
+                  title: "Tools en werkvormen",
+                  desc: "Om doelen, acties en vervolgstappen concreet te maken en vast te leggen",
+                  icon:
+                    "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+                },
+                {
+                  title: "Een methodische route",
+                  desc: "Van duiding → naar planvorming → naar passende interventies",
+                  icon: "M13 10V3L4 14h7v7l9-11h-7z",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="p-8 rounded-xl bg-white/85 backdrop-blur-[1px]"
+                  style={{ border: `1px solid ${BORDER}` }}
+                >
+                  <div
+                    className="flex items-center justify-center h-14 w-14 rounded-xl mb-6"
+                    style={{ background: "rgba(14, 42, 71, 0.08)", color: INK }}
+                  >
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3" style={{ color: INK }}>
+                    {item.title}
+                  </h3>
+                  <p className="leading-relaxed" style={{ color: TEXT }}>
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ONTWIKKELD VOOR PROFESSIONALS */}
+        <section className="relative py-16 lg:py-24">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center space-y-6 max-w-3xl mx-auto mb-16">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight" style={{ color: INK }}>
+                Ontwikkeld voor professionals die gezinnen willen begeleiden vanuit overzicht
+                en rust
+              </h2>
+              <p className="text-lg leading-relaxed" style={{ color: TEXT }}>
+                Ook wanneer de situatie complex en emotioneel beladen is.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Voor professionals",
+                  desc: "Ontwikkeld voor professionals die werken met samengestelde gezinnen, ook als je geen specialistische voorkennis hebt.",
+                  icon:
+                    "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
+                },
+                {
+                  title: "Rust & overzicht",
+                  desc: "Je krijgt zicht op onderliggende patronen en kunt in afstemming met het gezin bepalen wat prioriteit krijgt.",
+                  icon:
+                    "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z",
+                },
+                {
+                  title: "Direct toepasbaar",
+                  desc: "Concrete tools die je direct inzet in je sessies met gezinnen",
+                  icon: "M13 10V3L4 14h7v7l9-11h-7z",
+                },
+              ].map((item) => (
+                <div key={item.title} className="text-center space-y-4">
+                  <div
+                    className="flex items-center justify-center h-16 w-16 rounded-2xl mx-auto"
+                    style={{ background: "rgba(14, 42, 71, 0.08)", color: INK }}
+                  >
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold" style={{ color: INK }}>
+                    {item.title}
+                  </h3>
+                  <p className="leading-relaxed" style={{ color: TEXT }}>
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* HET KOMPASMODEL */}
+        <section className="relative py-16 lg:py-24 bg-slate-50/65 backdrop-blur-[1px]">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center space-y-6 max-w-3xl mx-auto mb-16">
+              <h2
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight"
+                style={{ color: INK }}
+              >
+                Het Kompasmodel: vijf pijlers die richting geven
+              </h2>
+              <p className="text-lg leading-relaxed" style={{ color: TEXT }}>
                 Centraal binnen Stiefkompas staat het Kompasmodel. Dit model bestaat uit vijf
                 samenhangende pijlers die helpen om de dynamiek binnen een samengesteld gezin
                 systematisch in kaart te brengen.
               </p>
-
-              <p>
+              <p className="text-base leading-relaxed" style={{ color: TEXT }}>
                 De pijlers maken zichtbaar waar spanning ontstaat, welke patronen meespelen en
                 welke stap op dit moment het meest passend is. In plaats van te blijven hangen
                 in losse problemen of incidenten, biedt het Kompasmodel een overkoepelend kader
@@ -134,174 +309,109 @@ export default function HomePage() {
               </p>
             </div>
 
-            <Link
-              href="/methode"
-              className="inline-flex items-center text-base font-semibold text-teal-700 hover:text-teal-900 group"
-            >
-              Lees meer over de pijlers
-              <svg
-                className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
+            <div className="mb-12">
+              <KompasModel />
+            </div>
           </div>
+        </section>
 
-          <div className="relative">
-            <div className="absolute inset-0 -z-10 bg-gradient-to-br from-teal-50 to-rose-50 rounded-3xl rotate-2" />
-            <div className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-md border border-stone-200">
-              <div className="w-full max-w-sm mx-auto">
-                <KompasModel />
+        {/* VOOR WIE + STEVIG & BEGRIJPELIJK */}
+        <section className="relative py-16 lg:py-24">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight" style={{ color: INK }}>
+                Voor wie
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed max-w-3xl mx-auto" style={{ color: TEXT }}>
+                Voor (stief)gezinscoaches, jeugdprofessionals en hulpverleners die werken met
+                samengestelde gezinnen en behoefte hebben aan overzicht en houvast.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <h3 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight" style={{ color: INK }}>
+                  Stevig én begrijpelijk
+                </h3>
+                <p className="text-lg leading-relaxed" style={{ color: TEXT }}>
+                  Gebouwd op inzichten uit systeemdenken, hechting, loyaliteit en stressregulatie,
+                  en vertaald naar begrijpelijke taal en toepasbaar in de dagelijkse praktijk.
+                </p>
+                <Link
+                  href="/wetenschappelijke-basis"
+                  className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all"
+                  style={{ color: INK }}
+                >
+                  Wetenschappelijke basis
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+
+              <div className="space-y-6">
+                <h3 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight" style={{ color: INK }}>
+                  Praktisch in je sessie
+                </h3>
+                <p className="text-lg leading-relaxed" style={{ color: TEXT }}>
+                  Met scans, kaarten en werkvormen maak je het gesprek concreet en leg je afspraken
+                  en vervolgstappen helder vast in het routeboek.
+                </p>
+                <Link
+                  href="/materialen-tools"
+                  className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all"
+                  style={{ color: INK }}
+                >
+                  Tools & materialen
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* FEATURE CARDS */}
-        <section className="grid gap-8 md:grid-cols-3">
-          <FeatureCard
-            title="Voor wie"
-            text="Voor (stief)gezinscoaches, jeugdprofessionals en hulpverleners die werken met samengestelde gezinnen en behoefte hebben aan overzicht en houvast."
-            href="/voor-coaches"
-            hrefLabel="Voor professionals"
-            accent="teal"
-          />
-          <FeatureCard
-            title="Stevig én begrijpelijk"
-            text="Gebouwd op inzichten uit systeemdenken, hechting, loyaliteit en stress, maar vertaald naar gewone taal en toepasbaar in de dagelijkse praktijk."
-            href="/wetenschappelijke-basis"
-            hrefLabel="Wetenschappelijke basis"
-            accent="tealSoft"
-          />
-          <FeatureCard
-            title="Praktisch in je sessie"
-            text="Met scans, kaarten en werkvormen maak je het gesprek concreet en leg je afspraken en vervolgstappen helder vast in het routeboek."
-            href="/materialen-tools"
-            hrefLabel="Tools & materialen"
-            accent="rose"
-          />
-        </section>
-
         {/* FINAL CTA */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-teal-900 p-10 sm:p-14 text-white shadow-xl">
-          <div className="pointer-events-none absolute -right-32 -top-32 h-64 w-64 rounded-full bg-teal-500/15 blur-2xl" />
-          <div className="pointer-events-none absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-rose-500/15 blur-2xl" />
+        <section
+          className="relative py-24 lg:py-32"
+          style={{ background: `linear-gradient(to bottom right, ${INK}, #1a3a5c, ${INK})` }}
+        >
+          <div className="mx-auto max-w-4xl px-6 text-center">
+            <div className="space-y-10">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+                Word gecertificeerd in de Stiefkompas-methodiek
+              </h2>
 
-          <div className="relative grid gap-8 lg:grid-cols-[1.5fr_1fr] items-center">
-            <div className="space-y-4">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">
-                Klaar om Stiefkompas in te zetten?
-              </h3>
-              <p className="text-lg text-white/90 leading-relaxed max-w-xl">
-                Bekijk de route door de methodiek, ontdek de tools en lees hoe je dit in jouw
-                praktijk stap voor stap toepast.
+              <p className="text-xl leading-relaxed max-w-2xl mx-auto" style={{ color: "rgba(255, 255, 255, 0.85)" }}>
+                Leer samengestelde gezinnen effectief begeleiden met structuur, taal en concrete handvatten.
               </p>
-            </div>
 
-            <div className="flex flex-wrap gap-4 lg:justify-end">
-              <Link
-                href="/methode"
-                className="inline-flex items-center justify-center rounded-full bg-teal-600 px-8 py-4 text-base font-semibold text-white hover:bg-teal-700 transition shadow-lg"
-              >
-                Start bij de methode
-              </Link>
-              <Link
-                href="/training-certificering"
-                className="inline-flex items-center justify-center rounded-full bg-transparent px-8 py-4 text-base font-semibold text-white hover:bg-white/10 transition border-2 border-white"
-              >
-                Certificering
-              </Link>
+              <div className="pt-4">
+                <Link
+                  href="/training-certificering"
+                  className="inline-flex items-center justify-center gap-3 px-12 py-5 text-xl font-bold rounded-xl bg-white hover:bg-slate-100 transition-all shadow-2xl hover:scale-[1.03]"
+                  style={{ color: INK }}
+                >
+                  Bekijk de opleiding
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+
+                <div className="mt-6">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center gap-2 text-base font-medium transition-colors hover:text-white"
+                    style={{ color: "rgba(255, 255, 255, 0.7)" }}
+                  >
+                    Of neem eerst contact op
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
-      </div>
-    </div>
-  );
-}
-
-function Card({
-  title,
-  children,
-  tone,
-  eyebrowClass,
-  dotClass,
-}: {
-  title: string;
-  children: React.ReactNode;
-  tone: "white" | "tint-rose";
-  eyebrowClass: string;
-  dotClass: string;
-}) {
-  const toneClass =
-    tone === "tint-rose"
-      ? "bg-gradient-to-br from-rose-50 to-pink-50 border-rose-100"
-      : "bg-white border-stone-200";
-
-  return (
-    <div className={`relative overflow-hidden rounded-3xl p-8 shadow-md border ${toneClass}`}>
-      <div className={`absolute -right-16 -top-16 h-32 w-32 rounded-full ${dotClass}`} />
-      <div className="relative space-y-3">
-        <h3 className={`text-sm font-bold uppercase tracking-[0.2em] ${eyebrowClass}`}>
-          {title}
-        </h3>
-        <p className="text-base text-slate-700 leading-relaxed">{children}</p>
-      </div>
-    </div>
-  );
-}
-
-function FeatureCard({
-  title,
-  text,
-  href,
-  hrefLabel,
-  accent,
-}: {
-  title: string;
-  text: string;
-  href: string;
-  hrefLabel: string;
-  accent: "teal" | "tealSoft" | "rose";
-}) {
-  const accentBg =
-    accent === "teal"
-      ? "from-teal-100 to-teal-200"
-      : accent === "tealSoft"
-      ? "from-teal-50 to-teal-100"
-      : "from-rose-100 to-rose-200";
-
-  const eyebrow =
-    accent === "rose"
-      ? "text-rose-700"
-      : accent === "teal"
-      ? "text-teal-700"
-      : "text-teal-800";
-
-  return (
-    <div className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-md border border-stone-200 hover:shadow-lg transition-all">
-      <div
-        className={`absolute -right-20 -bottom-20 h-40 w-40 rounded-full bg-gradient-to-br ${accentBg} opacity-50`}
-      />
-      <div className="relative space-y-4">
-        <h3 className={`text-sm font-bold uppercase tracking-[0.2em] ${eyebrow}`}>{title}</h3>
-        <p className="text-base text-slate-700 leading-relaxed">{text}</p>
-        <Link
-          href={href}
-          className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-teal-700 transition-colors group"
-        >
-          {hrefLabel}
-          <svg
-            className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </Link>
       </div>
     </div>
   );

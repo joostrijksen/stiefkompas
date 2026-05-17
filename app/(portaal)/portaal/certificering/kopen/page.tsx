@@ -2,7 +2,7 @@ import { purchaseCertification } from "../actions";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/lib/supabase/server";
-import { modules, SECTION_ORDER } from "../../leren/_content";
+import { COURSE_MODULES, getLearningTreeForModule } from "../../leren/_content";
 
 const REQUIRED_MODULES = ["module-1", "module-2"] as const;
 
@@ -13,60 +13,56 @@ type ProgressRow = {
 };
 
 function buildCompletedMap(rows: ProgressRow[]) {
-  const completedMap = new Map<string, Map<string, Set<string>>>();
+  const completedMap = new Map<string, Set<string>>();
 
   for (const r of rows) {
-    if (!r.module_slug || !r.lesson_slug || !r.section_id) continue;
+    if (!r.module_slug || !r.lesson_slug) continue;
 
-    if (!completedMap.has(r.module_slug)) completedMap.set(r.module_slug, new Map());
-    const lessonMap = completedMap.get(r.module_slug)!;
-
-    if (!lessonMap.has(r.lesson_slug)) lessonMap.set(r.lesson_slug, new Set());
-    lessonMap.get(r.lesson_slug)!.add(r.section_id);
+    // Voor de nieuwe structuur: sla chapter+block op als completed
+    const key = `${r.module_slug}/${r.lesson_slug}`;
+    if (!completedMap.has(r.module_slug)) {
+      completedMap.set(r.module_slug, new Set());
+    }
+    completedMap.get(r.module_slug)!.add(key);
   }
 
   return completedMap;
 }
 
-function requiredSectionsSet() {
-  return new Set<string>(SECTION_ORDER as any);
-}
+async function isModuleComplete(
+  completedMap: Map<string, Set<string>>,
+  moduleSlug: string
+): Promise<boolean> {
+  // Haal de learning tree op voor deze module
+  const tree = await getLearningTreeForModule(moduleSlug);
+  if (!tree) return false;
 
-function isLessonComplete(
-  completedMap: Map<string, Map<string, Set<string>>>,
-  moduleSlug: string,
-  lessonSlug: string
-) {
-  const set = completedMap.get(moduleSlug)?.get(lessonSlug);
-  if (!set) return false;
-
-  for (const req of requiredSectionsSet()) {
-    if (!set.has(req)) return false;
+  // Check of alle blocks in alle chapters compleet zijn
+  for (const chapter of tree.chapters) {
+    for (const block of chapter.blocks) {
+      const key = `${moduleSlug}/${chapter.chapterSlug}/${block.blockSlug}`;
+      const completedSet = completedMap.get(moduleSlug);
+      if (!completedSet || !completedSet.has(key)) {
+        return false;
+      }
+    }
   }
+
   return true;
 }
 
-function isModuleComplete(
-  completedMap: Map<string, Map<string, Set<string>>>,
-  moduleSlug: string
-) {
-  const mod = modules.find((m) => m.slug === moduleSlug);
-  if (!mod) return false;
-
-  return mod.lessons.every((l) => isLessonComplete(completedMap, moduleSlug, l.slug));
-}
-
-function computeEligibility(completedMap: Map<string, Map<string, Set<string>>>) {
-  const perModule = REQUIRED_MODULES.map((slug) => {
-    const exists = Boolean(modules.find((m) => m.slug === slug));
-    const complete = exists ? isModuleComplete(completedMap, slug) : false;
-    return { slug, exists, complete };
-  });
+async function computeEligibility(completedMap: Map<string, Set<string>>) {
+  const perModule = await Promise.all(
+    REQUIRED_MODULES.map(async (slug) => {
+      const exists = Boolean(COURSE_MODULES.find((m) => m.slug === slug));
+      const complete = exists ? await isModuleComplete(completedMap, slug) : false;
+      return { slug, exists, complete };
+    })
+  );
 
   const eligible = perModule.every((m) => m.exists && m.complete);
   return { eligible, perModule };
 }
-
 
 export default async function CertificationPurchasePage({
   searchParams,
@@ -125,7 +121,7 @@ export default async function CertificationPurchasePage({
   }
 
   const completedMap = buildCompletedMap((completedRows ?? []) as ProgressRow[]);
-  const { eligible: computedEligible, perModule } = computeEligibility(completedMap);
+  const { eligible: computedEligible, perModule } = await computeEligibility(completedMap);
 
   const eligible = force ? true : computedEligible;
 

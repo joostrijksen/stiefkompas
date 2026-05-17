@@ -1,0 +1,325 @@
+import Link from "next/link";
+import Image from "next/image";
+import { KompasModel } from "../components/kompas-model";
+
+export default function HomePage() {
+  return (
+    <div className="relative bg-white">
+      {/* HERO SECTION */}
+      <section className="relative min-h-[82vh] overflow-hidden">
+        {/* Hero image als achtergrond */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/hero-stiefkompasv8.png"
+            alt="Abstract kompas – richting en overzicht"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          {/* Gradient overlay - transparant achter tekst, afbeelding zichtbaar rechts */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/98 via-white/90 via-40% to-transparent" />
+        </div>
+
+        {/* Organische vormen (zachter, rustiger) als extra laag */}
+        <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+          <div
+            className="absolute -right-[18%] top-[8%] h-[520px] w-[520px] rounded-[60%_40%_30%_70%/60%_30%_70%_40%] bg-gradient-to-br from-[#F02B8A]/20 to-[#F02B8A]/10 blur-2xl"
+            style={{ transform: "rotate(-12deg)" }}
+          />
+          <div
+            className="absolute -left-[14%] bottom-[0%] h-[620px] w-[620px] rounded-[40%_60%_70%_30%/40%_50%_60%_50%] bg-gradient-to-tr from-[#17B3B0]/20 to-[#17B3B0]/10 blur-2xl"
+            style={{ transform: "rotate(18deg)" }}
+          />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-28">
+          <div className="max-w-3xl space-y-8">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur-sm px-4 py-2 shadow-sm border border-slate-200/60">
+              <span className="h-2 w-2 rounded-full bg-[#17B3B0]" />
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">
+                Methodiek voor samengestelde gezinnen
+              </span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[#0E2A47] leading-[1.08]">
+              Stiefkompas brengt rust en richting in de begeleiding van samengestelde gezinnen
+            </h1>
+
+            <div className="space-y-4 max-w-2xl">
+              <p className="text-lg sm:text-xl text-slate-600 leading-relaxed">
+                Een methodiek voor sociaal werkers, coaches, gezinsbegeleiders en hulpverleners die met 
+                samengestelde gezinnen werken. Je krijgt structuur, overzicht en concrete tools om gezinnen 
+                planmatig te begeleiden, met blijvende aandacht voor relaties en afstemming.
+              </p>
+
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+                Samengestelde gezinnen brengen unieke uitdagingen: meerdere loyaliteiten, verschillende 
+                opvoedstijlen, en ieder z'n eigen tempo. Stiefkompas helpt je om overzicht te krijgen en 
+                samen met het gezin te bepalen wat nu het belangrijkst is.
+              </p>
+
+              <div className="rounded-3xl border border-slate-200 bg-white/70 backdrop-blur-sm p-5 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-700 mb-3">
+                  Wat levert Stiefkompas jou op?
+                </p>
+                <ul className="grid gap-2 text-sm sm:text-base text-slate-700">
+                  <li className="flex gap-3">
+                    <span className="text-[#17B3B0]">✓</span>
+                    <span>Een helder analysekader met vijf pijlers om gezinsdynamiek te ordenen</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-[#17B3B0]">✓</span>
+                    <span>Concrete tools om doelen en vervolgstappen vast te leggen</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-[#17B3B0]">✓</span>
+                    <span>Een methodische route van duiding naar interventie</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 pt-3">
+              <Link
+                href="/methode"
+                className="inline-flex items-center justify-center rounded-full bg-[#17B3B0] px-8 py-4 text-base font-semibold text-white hover:bg-[#149390] transition shadow-md"
+              >
+                Ontdek de methodiek
+                <span className="ml-2 text-xs opacity-75">Gratis</span>
+              </Link>
+
+              <Link
+                href="/training-certificering"
+                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-[#0E2A47] hover:bg-slate-50 transition shadow-sm border border-slate-200"
+              >
+                Training & certificering
+              </Link>
+            </div>
+
+            {/* trust line */}
+            <div className="space-y-2 max-w-2xl">
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Ontwikkeld door <strong>Karin van der Sluis-Rijksen</strong>, specialist in stiefgezinsbegeleiding 
+                met 15+ jaar ervaring in gezinstherapie en relatiewerk.
+              </p>
+              <p className="text-sm text-slate-500 leading-relaxed">
+                De methodiek is vrij toegankelijk. Voor verdieping en certificering bieden we professionele trainingen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTENT */}
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-20 space-y-28">
+        {/* 3 HIGHLIGHT CARDS */}
+        <section className="grid gap-8 md:grid-cols-3">
+          <HighlightCard tone="white" title="Voor begeleidende professionals" eyebrowClass="text-[#17B3B0]" dotClass="bg-[#17B3B0]/15">
+            Ontwikkeld voor professionals die werken met samengestelde gezinnen,
+            ook als je geen specialistische voorkennis hebt.
+          </HighlightCard>
+
+          <HighlightCard tone="tint-rose" title="Rust & overzicht" eyebrowClass="text-[#F02B8A]" dotClass="bg-[#F02B8A]/20">
+            Je krijgt zicht op onderliggende patronen en kunt in afstemming met het gezin bepalen wat prioriteit krijgt.
+          </HighlightCard>
+
+          <HighlightCard tone="white" title="Direct toepasbaar" eyebrowClass="text-[#2C4B9A]" dotClass="bg-[#2C4B9A]/15">
+            Concrete tools die je direct inzet in je sessies met samengestelde gezinnen.
+          </HighlightCard>
+        </section>
+
+        {/* MODEL SECTION */}
+        <section className="grid gap-12 lg:grid-cols-2 items-center">
+          <div className="space-y-6">
+            <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-[#0E2A47]">
+              Het Kompasmodel: vijf pijlers die richting geven
+            </h2>
+
+            <div className="space-y-4 text-base text-slate-600 leading-relaxed">
+              <p>
+                Het Kompasmodel brengt orde in chaos: vijf pijlers die laten zien waar spanning ontstaat, 
+                welke patronen meespelen en wat nu de beste stap is. In plaats van verzanden in losse 
+                problemen krijg je overzicht en richting.
+              </p>
+
+              <p>
+                De pijlers helpen om de dynamiek binnen een samengesteld gezin systematisch in kaart te 
+                brengen en prioriteiten te stellen. Zo werk je gefocust en biedt je het gezin houvast 
+                op momenten dat alles overweldigend aanvoelt.
+              </p>
+            </div>
+
+            <Link
+              href="/methode"
+              className="inline-flex items-center text-base font-semibold text-[#17B3B0] hover:text-[#0E2A47] group"
+            >
+              Lees meer over de vijf pijlers
+              <svg
+                className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+
+          <div className="relative">
+            <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#17B3B0]/10 to-[#F02B8A]/10 rounded-3xl rotate-2" />
+            <div className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-md border border-slate-200">
+              <div className="w-full max-w-sm mx-auto">
+                <KompasModel />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FEATURE CARDS */}
+        <section className="grid gap-8 md:grid-cols-3">
+          <FeatureCard
+            title="Voor wie"
+            text="Voor (stief)gezinscoaches, jeugdprofessionals en hulpverleners die werken met samengestelde gezinnen en behoefte hebben aan overzicht en houvast."
+            href="/voor-coaches"
+            hrefLabel="Voor professionals"
+            accent="teal"
+          />
+          <FeatureCard
+            title="Stevig én begrijpelijk"
+            text="Gebouwd op inzichten uit systeemdenken, hechting, loyaliteit en stressregulatie, en vertaald naar begrijpelijke taal en toepasbaar in de dagelijkse praktijk."
+            href="/wetenschappelijke-basis"
+            hrefLabel="Wetenschappelijke basis"
+            accent="tealSoft"
+          />
+          <FeatureCard
+            title="Praktisch in je sessie"
+            text="Stiefkompas biedt verschillende instrumenten die ondersteunend zijn aan de begeleidingssessies en helpen om overzicht, inzicht en focus aan te brengen."
+            href="/materialen-tools"
+            hrefLabel="Tools & materialen"
+            accent="rose"
+          />
+        </section>
+
+        {/* FINAL CTA */}
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0E2A47] via-[#0E2A47] to-[#2C4B9A] p-10 sm:p-14 text-white shadow-xl">
+          <div className="pointer-events-none absolute -right-32 -top-32 h-64 w-64 rounded-full bg-[#17B3B0]/15 blur-2xl" />
+          <div className="pointer-events-none absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-[#F02B8A]/15 blur-2xl" />
+
+          <div className="relative grid gap-8 lg:grid-cols-[1.5fr_1fr] items-center">
+            <div className="space-y-4">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">
+                Klaar om met Stiefkompas te werken?
+              </h3>
+              <p className="text-lg text-white/90 leading-relaxed max-w-xl">
+                Ontdek de opbouw van de methodiek, verken de instrumenten en lees hoe je dit stap voor 
+                stap inzet in jouw praktijk. Begin vandaag met de gratis toegankelijke methodiek.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4 lg:justify-end">
+              <Link
+                href="/methode"
+                className="inline-flex items-center justify-center rounded-full bg-[#17B3B0] px-8 py-4 text-base font-semibold text-white hover:bg-[#149390] transition shadow-lg"
+              >
+                Start bij de methode
+              </Link>
+              <Link
+                href="/training-certificering"
+                className="inline-flex items-center justify-center rounded-full bg-transparent px-8 py-4 text-base font-semibold text-white hover:bg-white/10 transition border-2 border-white"
+              >
+                Bekijk de training
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+function HighlightCard({
+  title,
+  children,
+  tone,
+  eyebrowClass,
+  dotClass,
+}: {
+  title: string;
+  children: React.ReactNode;
+  tone: "white" | "tint-rose";
+  eyebrowClass: string;
+  dotClass: string;
+}) {
+  const toneClass =
+    tone === "tint-rose"
+      ? "bg-gradient-to-br from-[#F02B8A]/8 to-[#F02B8A]/5 border-[#F02B8A]/20"
+      : "bg-white border-slate-200";
+
+  return (
+    <div className={`relative overflow-hidden rounded-3xl p-8 shadow-md border ${toneClass}`}>
+      <div className={`absolute -right-16 -top-16 h-32 w-32 rounded-full ${dotClass}`} />
+      <div className="relative space-y-3">
+        <h3 className={`text-sm font-bold uppercase tracking-[0.2em] ${eyebrowClass}`}>
+          {title}
+        </h3>
+        <p className="text-base text-slate-700 leading-relaxed">{children}</p>
+      </div>
+    </div>
+  );
+}
+
+function FeatureCard({
+  title,
+  text,
+  href,
+  hrefLabel,
+  accent,
+}: {
+  title: string;
+  text: string;
+  href: string;
+  hrefLabel: string;
+  accent: "teal" | "tealSoft" | "rose";
+}) {
+  const accentBg =
+    accent === "teal"
+      ? "from-[#17B3B0]/25 to-[#17B3B0]/15"
+      : accent === "tealSoft"
+      ? "from-[#17B3B0]/15 to-[#17B3B0]/8"
+      : "from-[#F02B8A]/25 to-[#F02B8A]/15";
+
+  const eyebrow =
+    accent === "rose"
+      ? "text-[#F02B8A]"
+      : accent === "teal"
+      ? "text-[#17B3B0]"
+      : "text-[#2C4B9A]";
+
+  return (
+    <div className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-md border border-slate-200 hover:shadow-lg transition-all">
+      <div
+        className={`absolute -right-20 -bottom-20 h-40 w-40 rounded-full bg-gradient-to-br ${accentBg}`}
+      />
+      <div className="relative space-y-4">
+        <h3 className={`text-sm font-bold uppercase tracking-[0.2em] ${eyebrow}`}>{title}</h3>
+        <p className="text-base text-slate-700 leading-relaxed">{text}</p>
+        <Link
+          href={href}
+          className="inline-flex items-center text-sm font-semibold text-[#0E2A47] hover:text-[#17B3B0] transition-colors group"
+        >
+          {hrefLabel}
+          <svg
+            className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
+    </div>
+  );
+}

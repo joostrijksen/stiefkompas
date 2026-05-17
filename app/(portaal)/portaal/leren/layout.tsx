@@ -1,24 +1,15 @@
-// app/(portaal)/portaal/leren/layout.tsx
-import { modules } from "./_content";
-import LerenSidebar from "./LerenSidebar";
+import { ReactNode } from "react";
 
-type LayoutProps = {
-  children: React.ReactNode;
-  params: Promise<{ moduleSlug?: string; lessonSlug?: string }>;
-};
+export const dynamic = "force-dynamic";
 
-export default async function LerenLayout({ children, params }: LayoutProps) {
-  const { moduleSlug, lessonSlug } = await params;
-
+export default function LerenLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="grid gap-8 lg:grid-cols-[320px_1fr]">
-      <LerenSidebar
-        modules={modules}
-        moduleSlug={moduleSlug}
-        lessonSlug={lessonSlug}
-      />
-
-      <main className="min-w-0">{children}</main>
+    // ✅ Zorgt dat BODY niet meer scrolt
+    <div className="bg-slate-50 h-[calc(100vh-64px)] overflow-hidden">
+      <div className="max-w-7xl mx-auto h-full px-4 py-6">
+        {/* Let op: children moet straks de grid bevatten die zélf 2 kolommen heeft */}
+        <div className="h-full">{children}</div>
+      </div>
     </div>
   );
 }

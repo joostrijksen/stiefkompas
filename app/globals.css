@@ -39,3 +39,52 @@ a {
 a:hover {
   text-decoration-color: rgba(15, 23, 42, 0.7);
 }
+
+/* --- MDX styles (kogelvrij, zonder typography plugin) --- */
+.mdx {
+  color: rgb(51 65 85); /* slate-700 */
+  line-height: 1.75;
+  max-width: 72ch;      /* fijn leesbaar */
+}
+
+/* Headings duidelijker */
+.mdx h1, .mdx h2, .mdx h3 {
+  color: rgb(15 23 42); /* slate-900 */
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.mdx h2 {
+  margin-top: 2.2rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.25rem;
+}
+
+.mdx h3 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+/* Paragrafen en lijsten */
+.mdx p { margin: 0.75rem 0; }
+.mdx ul, .mdx ol { margin: 0.75rem 0; padding-left: 1.25rem; }
+.mdx li { margin: 0.25rem 0; }
+
+/* Quotes */
+.mdx blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid rgb(226 232 240); /* slate-200 */
+  color: rgb(51 65 85);
+}
+
+/* ✅ Weg met die horizontale lijnen uit '---' */
+.mdx hr { display: none; }
+
+/* Links */
+.mdx a {
+  color: rgb(15 23 42);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

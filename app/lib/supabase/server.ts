@@ -1,8 +1,8 @@
-// app/lib/supabase/server.ts
-import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+import { cache } from "react";
 
-export async function createClient() {
+export const createClient = cache(async () => {
   const cookieStore = await cookies();
 
   return createServerClient(
@@ -19,10 +19,10 @@ export async function createClient() {
               cookieStore.set(name, value, options);
             });
           } catch {
-            // In Server Components is cookies() vaak read-only.
+            // ok (server components kunnen soms niet setten)
           }
         },
       },
     }
   );
-}
+});

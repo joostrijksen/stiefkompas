@@ -1,82 +1,89 @@
-'use client'
+import Link from "next/link";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { submitSitePassword } from "./actions";
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+function safeNext(next?: string | null) {
+  if (!next) return "/";
+  if (!next.startsWith("/")) return "/";
+  if (next.startsWith("//")) return "/";
+  return next;
+}
 
-export default function SitePasswordPage() {
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
-  const router = useRouter()
+export default async function SitePasswordPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ next?: string }>;
+}) {
+  const sp = (await searchParams) ?? {};
+  const next = safeNext(sp.next ?? "/");
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError('')
-    
-    try {
-      const response = await fetch('/api/verify-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password })
-      })
-      
-      if (response.ok) {
-        router.push('/')
-        router.refresh()
-      } else {
-        setError('Incorrect wachtwoord')
-        setIsLoading(false)
-      }
-    } catch (err) {
-      setError('Er ging iets mis')
-      setIsLoading(false)
-    }
-  }
-
-  if (!isMounted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-          <div className="h-8 w-full bg-gray-200 animate-pulse rounded mb-6"></div>
-          <div className="h-10 w-full bg-gray-200 animate-pulse rounded mb-4"></div>
-          <div className="h-10 w-full bg-gray-200 animate-pulse rounded"></div>
-        </div>
-      </div>
-    )
-  }
+  // Als cookie al bestaat: meteen door
+  const hasCookie = cookies().get("site-password-auth")?.value === "1";
+  if (hasCookie) redirect(next);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h1 className="text-2xl font-bold mb-6 text-center">
-          Site beschermd met wachtwoord
-        </h1>
-        <form onSubmit={handleSubmit} key="password-form">
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Voer wachtwoord in"
-            className="w-full px-4 py-2 border rounded-lg mb-4"
-            autoComplete="new-password"
-            disabled={isLoading}
-          />
-          {error && <p className="text-red-500 mb-4">{error}</p>}
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
-          >
-            {isLoading ? 'Bezig...' : 'Toegang verkrijgen'}
-          </button>
-        </form>
+    <div className="min-h-screen bg-gradient-to-b from-teal-600 via-teal-700 to-slate-900">
+      <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-6 py-14">
+        <div className="w-full max-w-md">
+          <div className="rounded-3xl bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.35)] ring-1 ring-black/5 backdrop-blur">
+            <div className="px-7 pt-8 pb-6">
+              {/* Onmiskenbaar zodat je zeker weet dat je op deze route zit */}
+              <div className="text-xs font-semibold tracking-[0.2em] uppercase text-teal-700">
+                SITE PASSWORD
+              </div>
+              <h1 className="mt-2 text-2xl font-semibold text-slate-900">
+                Website afgeschermd
+              </h1>
+              <p className="mt-2 text-sm text-slate-600">
+                Vul het wachtwoord in om de website te bekijken.
+              </p>
+
+              <form action={submitSitePassword} className="mt-6 space-y-4">
+                <input type="hidden" name="next" value={next} />
+
+                <div>
+                  <label className="text-sm font-medium text-slate-800">
+                    Wachtwoord
+                  </label>
+                  <input
+                    name="password"
+                    type="password"
+                    required
+                    autoComplete="current-password"
+                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-teal-400 focus:ring-4 focus:ring-teal-200/60"
+                    placeholder="••••••••"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className={[
+                    "mt-2 w-full rounded-2xl px-4 py-3 text-sm font-semibold text-white",
+                    "shadow-sm transition",
+                    "bg-gradient-to-r from-teal-700 via-teal-600 to-slate-800",
+                    "hover:brightness-110 active:brightness-95",
+                    "focus:outline-none focus:ring-4 focus:ring-white/30",
+                  ].join(" ")}
+                >
+                  Doorgaan
+                </button>
+              </form>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 border-t border-slate-200/70 px-7 py-5 text-xs text-slate-600">
+              <span>Stiefkompas</span>
+              <Link href="/login" className="underline underline-offset-4 hover:text-slate-900">
+                Naar login
+              </Link>
+            </div>
+          </div>
+
+          <p className="mt-6 text-center text-xs text-white/80">
+            Tip: na het invullen wordt er een cookie gezet (7 dagen).
+          </p>
+        </div>
       </div>
     </div>
-  )
+  );
 }

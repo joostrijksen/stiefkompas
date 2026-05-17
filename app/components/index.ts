@@ -1,0 +1,1 @@
+export { default as StiefkompasScanPro } from "./gezinscan/StiefkompasScanPro";

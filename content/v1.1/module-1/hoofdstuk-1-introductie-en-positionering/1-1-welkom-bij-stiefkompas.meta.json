@@ -1,0 +1,12 @@
+{
+  "title": "1.1 Welkom bij Stiefkompas",
+  "description": "Start van de opleiding: wat je gaat leren, hoe je werkt met het Kompasmodel en hoe je de leeromgeving gebruikt.",
+  "durationMinutes": 12,
+  "level": "start",
+  "tags": ["intro", "positie", "loyaliteit", "methodiek"],
+  "learningGoals": [
+    "Uitleggen wat Stiefkompas is (en niet is)",
+    "Intentie versus effect herkennen in systeemdynamiek",
+    "Navigeren in de leeromgeving: module → hoofdstuk → blok"
+  ]
+}
