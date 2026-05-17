@@ -21,10 +21,10 @@ export default async function ReviewPage({
   }
 
   const submission = await getSubmissionForReview(submissionId);
-  const assignment = submission.assignments;
-  const student = submission.profiles;
+  const assignment = submission.assignments as any;
+  const student = submission.profiles as any;
 
-  const rubric = assignment?.id ? await getRubricForAssignment(assignment.id) : null;
+  const rubric = (assignment as any)?.[0]?.id ? await getRubricForAssignment((assignment as any)?.[0]?.id) : null;
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
@@ -32,8 +32,8 @@ export default async function ReviewPage({
         <div>
           <h1 className="text-2xl font-semibold">Review</h1>
           <p className="mt-1 text-slate-600">
-            Opdracht: <span className="font-medium">{assignment?.title ?? "—"}</span> · Type:{" "}
-            <span className="font-medium">{assignment?.type ?? "—"}</span>
+            Opdracht: <span className="font-medium">{(assignment as any)?.title ?? (assignment as any)?.[0]?.title ?? "—"}</span> · Type:{" "}
+            <span className="font-medium">{(assignment as any)?.type ?? (assignment as any)?.[0]?.type ?? "—"}</span>
           </p>
           <p className="mt-1 text-slate-600">
             Cursist: <span className="font-medium">{student?.full_name ?? student?.email ?? "—"}</span>

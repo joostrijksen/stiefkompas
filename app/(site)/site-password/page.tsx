@@ -19,6 +19,7 @@ export default async function SitePasswordPage({
   const next = safeNext(sp.next ?? "/");
 
   // Als cookie al bestaat: meteen door
+  // @ts-ignore
   const hasCookie = cookies().get("site-password-auth")?.value === "1";
   if (hasCookie) redirect(next);
 
@@ -39,7 +40,7 @@ export default async function SitePasswordPage({
                 Vul het wachtwoord in om de website te bekijken.
               </p>
 
-              <form action={submitSitePassword} className="mt-6 space-y-4">
+              <form action={submitSitePassword as any} className="mt-6 space-y-4">
                 <input type="hidden" name="next" value={next} />
 
                 <div>

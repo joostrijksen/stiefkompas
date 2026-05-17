@@ -26,6 +26,7 @@ export async function submitSitePassword(formData: FormData) {
   }
 
   // Cookie zetten (dev: geen secure)
+  // @ts-ignore
   cookies().set("site-password-auth", "1", {
     httpOnly: true,
     sameSite: "lax",

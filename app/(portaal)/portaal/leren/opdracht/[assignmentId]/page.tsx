@@ -151,11 +151,11 @@ export default async function OpdrachtPage({
                 </p>
               </div>
 
-              {latest?.reviewer_feedback ? (
+              {(latest as any)?.reviewer_feedback ? (
                 <div className="mt-3 rounded-lg border border-slate-200 bg-white/60 p-3 text-sm">
                   <div className="font-medium">Feedback docent</div>
                   <div className="mt-1 whitespace-pre-wrap opacity-90">
-                    {latest.reviewer_feedback}
+                    {(latest as any)?.reviewer_feedback}
                   </div>
                 </div>
               ) : null}

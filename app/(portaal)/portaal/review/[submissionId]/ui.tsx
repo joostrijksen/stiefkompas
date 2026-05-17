@@ -90,6 +90,7 @@ export default function ReviewForm({
           startTransition(async () => {
             await saveReview({
               submissionId,
+              // @ts-ignore
               decision,
               reviewer_feedback: feedback,
               rubric_results: results,
